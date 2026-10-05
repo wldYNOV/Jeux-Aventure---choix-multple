@@ -1,0 +1,118 @@
+/* Le Phare des âmes — feuille de style commune aux 14 scènes. */
+
+/* 1. Palette et base */
+:root {
+    color-scheme: dark;
+    --ink: #08141c;
+    --paper: #f0eee7;
+    --muted: #aebdc2;
+    --copper: #e5b775;
+    --line: #314048;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+a { color: inherit; }
+a:focus-visible { outline: 3px solid var(--copper); outline-offset: 5px; }
+.skip-link {
+    position: fixed;
+    top: -6rem;
+    left: 1rem;
+    padding: .8rem 1.2rem;
+    z-index: 10;
+    background: var(--copper);
+    color: var(--ink);
+}
+.skip-link:focus { top: 1rem; }
+
+/* 2. En-tête et pied de page */
+.site-header, .site-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.4rem 4.5%;
+}
+.site-header { border-bottom: 1px solid var(--line); }
+.brand { text-decoration: none; font-size: .85rem; letter-spacing: .16em; }
+.brand-mark { color: var(--copper); font-size: 1.55rem; vertical-align: middle; margin-right: .6rem; }
+.header-caption { font-size: .75rem; color: var(--muted); letter-spacing: .13em; }
+.restart { font-size: .875rem; text-underline-offset: 5px; }
+.restart:hover, .site-footer a:hover { color: var(--copper); }
+.site-footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .75rem; letter-spacing: .05em; }
+.site-footer a { font-size: .875rem; text-underline-offset: 4px; letter-spacing: 0; }
+.site-footer a span { font-size: .75rem; }
+.footer-separator { margin: 0 .7rem; color: var(--copper); }
+
+/* 3. Lecture à gauche, paysage à droite */
+.game-layout { display: grid; grid-template-columns: 55% 45%; min-height: calc(100svh - 151px); }
+.story { padding: 3.5rem 9% 2.8rem 8.2%; align-self: center; animation: appear .65s ease-out both; }
+.eyebrow { margin: 0 0 1rem; color: var(--copper); text-transform: uppercase; letter-spacing: .2em; font-size: .75rem; }
+h1 { max-width: 12ch; margin: 0; font-family: Georgia, 'Times New Roman', serif; font-weight: 400; font-size: clamp(2.5rem, 4.6vw, 4.8rem); line-height: 1.02; letter-spacing: -.045em; text-wrap: balance; }
+.scene-quote { margin: 1.5rem 0; color: var(--copper); font-family: Georgia, 'Times New Roman', serif; font-size: 1.17rem; font-style: italic; line-height: 1.5; }
+.narrative { max-width: 62ch; color: #c5cdd0; line-height: 1.85; }
+.narrative p { margin: 0 0 .9rem; }
+.landscape { position: relative; overflow: hidden; min-height: 620px; background: linear-gradient(180deg, #08141c05 45%, #08141ced 100%), url('assets/backgrounds/ker-is.webp') 67% center / cover; border-left: 1px solid var(--line); }
+.landscape::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, #08141c55, transparent 35%); }
+.landscape-caption { position: absolute; left: 10%; right: 8%; bottom: 3rem; z-index: 1; }
+.coordinate, .landscape-caption > span:last-child { font-size: .75rem; letter-spacing: .18em; color: #cbd1d0; }
+.landscape-caption p { margin: .6rem 0 .8rem; font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; line-height: 1.2; }
+.caption-line { display: block; width: 2.5rem; height: 1px; background: var(--copper); margin: 1.2rem 0; }
+.scene-number { position: absolute; top: 2rem; right: 8%; color: #e5b775b0; font-family: Georgia, 'Times New Roman', serif; font-size: 3.5rem; line-height: 1; }
+
+/* 4. Les liens de choix sont utilisables sans JavaScript. */
+.choices { margin-top: 1.8rem; }
+.choices-label { font-size: .75rem; letter-spacing: .15em; color: var(--muted); margin: 0 0 .8rem; }
+.choice { display: flex; align-items: center; gap: 1rem; margin-top: .65rem; padding: 1rem 1.2rem; border: 1px solid #5c625d; text-decoration: none; background: #142129; transition: background .2s, border-color .2s, transform .2s; }
+.choice:hover { background: #243136; border-color: var(--copper); transform: translateY(-2px); }
+.choice img { flex: 0 0 24px; }
+.choice strong { display: block; font-size: 1rem; font-weight: 500; }
+.choice small { display: block; font-size: .875rem; color: var(--muted); margin-top: .15rem; }
+.choice-number { margin-left: auto; color: var(--copper); font-family: Georgia, 'Times New Roman', serif; font-size: 1rem; }
+.story-note { color: var(--muted); font-size: .8rem; line-height: 1.6; padding-left: 1rem; border-left: 1px solid var(--copper); margin: 1.4rem 0 0; }
+
+/* 5. Variations d’ambiance, sans dupliquer les règles communes. */
+.theme-village .landscape { background-position: 77% center; }
+.theme-depth .landscape { background-position: 30% center; filter: saturate(.65); }
+.theme-tower .landscape { background-position: 85% center; }
+.theme-dawn .landscape { background-image: linear-gradient(180deg, #bd854544, #08141cdb), url('assets/backgrounds/ker-is.webp'); }
+.ending-label { display: inline-block; margin: 1.4rem 0 0; padding: .4rem .8rem; color: var(--copper); border: 1px solid #776444; font-size: .8rem; letter-spacing: .08em; }
+@keyframes appear { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* 6. Adaptation aux tablettes, mobiles et préférences d’accessibilité. */
+@media (min-width: 1600px) { .story { max-width: 880px; justify-self: end; width: 100%; } }
+@media (max-width: 1050px) {
+    .header-caption { display: none; }
+    .game-layout { grid-template-columns: 60% 40%; }
+    .story { padding: 3rem 7%; }
+}
+@media (max-width: 720px) {
+    .site-header { padding: 1rem 5%; }
+    .brand { font-size: .75rem; letter-spacing: .08em; }
+    .brand-mark { margin-right: .25rem; }
+    .restart { font-size: .8rem; }
+    .game-layout { display: flex; flex-direction: column; }
+    .landscape { order: -1; width: 100%; min-height: 230px; height: 32svh; max-height: 360px; border-left: 0; border-bottom: 1px solid var(--line); background-position: 65% 44%; }
+    .landscape-caption { left: 6%; bottom: 1.5rem; }
+    .landscape-caption p { font-size: 1.5rem; margin: .4rem 0 0; }
+    .caption-line, .landscape-caption > span:last-child { display: none; }
+    .scene-number { top: 1.5rem; font-size: 2.5rem; }
+    .story { width: 100%; padding: 2rem 6% 2.5rem; }
+    h1 { max-width: 14ch; font-size: clamp(2.5rem, 10vw, 3.7rem); }
+    .scene-quote { margin-top: 1.2rem; }
+    .choice { padding: 1rem .9rem; gap: .8rem; }
+    .site-footer { align-items: flex-start; flex-direction: column; gap: .6rem; padding: 1.4rem 6%; }
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .story { animation: none; }
+    .choice { transition: none; }
+    .choice:hover { transform: none; }
+}
